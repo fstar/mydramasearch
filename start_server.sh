@@ -1,2 +1,1 @@
-source ~/.bashrc
-python manage.py run -p 5000 -m debugs
+/root/.pyenv/versions/py3env/bin/python3 manage.py run -p 5000 -m gevent
