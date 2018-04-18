@@ -17,8 +17,6 @@ def create_app():
 
     csrf.init_app(app=app)
 
-
-
     app.register_blueprint(spider_management_bp)
     app.register_blueprint(api_bp)
 
@@ -26,13 +24,10 @@ def create_app():
     csrf.exempt(api_bp)
 
     db.init_app(app)
+    db.create_all()
 
     redis_client.init_app(app)
 
-    migrate = Migrate(app, db)
-
-
-    print(app.url_map)
 
     return app
 
