@@ -1,0 +1,65 @@
+{% extends "spider/head.html" %}
+{% block head %}
+<body>
+{% include "spider/header.html" %}
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/spider/common.css">
+    <link rel="stylesheet" href="/static/css/spider/series.css" />
+    <link rel="stylesheet" href="/static/css/spider/bootstrap.min.css" />
+</head>
+<body>
+    <div  class="container-fluid body_nav table_width">
+        <div class="search-tag">
+            <span class="search-container">
+                <button type="submit" class="btn btn-default" id="search">搜索</button>
+            </span>
+             <span class="video-select">
+                <select class="form-control" name="video_status">
+                    <option value="">状态&nbsp;(全部)</option>
+                    <option value="-1">下载失败</option>
+                    <option value="-2">上传失败</option>
+                    <option value="1">未触发下载</option>
+                    <option value="2">等待下载</option>
+                    <option value="3">下载中</option>
+                    <option value="4">下载完成</option>
+                    <option value="5">等待上传</option>
+                    <option value="6">上传中</option>
+                    <option value="7">上传完成</option>
+                </select>
+            </span>
+        </div>
+        <div class="table-style font-size">
+            <table class="table table-striped table-advance table-hover">
+                <thead>
+                    <tr>
+                        <th><label style="margin-bottom: 0px"><input id="allSelect" type="checkbox" value="">全选</label></th>
+                        <th>影片名</th>
+                        <th>影片来源</th>
+                        <th>影片大小</th>
+                        <th>影片类型</th>
+                        <th>影片状态</th>
+                        <th>
+                            <select class="from-control" id="download-level-1" style="height: 30px;">
+                                    <option value="1">下载低</option>
+                                    <option value="2">下载中</option>
+                                    <option value="3">下载高</option>
+                            </select>
+                            <button type="button" class="btn btn-warning" onclick="download(id_list='', status=1, interf=2)">批量下载</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="json">
+                </tbody>
+            </table>
+       </div>
+        <div id="warning">
+        </div>
+    </div>
+    <script src="/static/js/spider/common.js"></script>
+    <script src="/static/js/spider/series.js"></script>
+</body>
+
+</html>
+{% endblock head %}

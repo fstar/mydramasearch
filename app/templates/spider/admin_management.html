@@ -1,0 +1,157 @@
+{% extends "head.html" %}
+{% block head %}
+<body>
+{% include "header.html" %}
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="../static/css/admin_management.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container body_nav">
+        <div class="add_user">
+            <button type="button" class="btn btn-default" onclick="addRow()">+添加用户</button>
+        </div>
+        <div>
+        <fieldset>
+            <table class="table table-striped table-advance table-hover" id="onTable">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>token</th>
+                        <th>有效</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     {% for i in userInfo %}
+                         <tr>
+                        <td style="vertical-align: middle">{{ i.id }}</td>
+                        <td style="vertical-align: middle">{{ i.username }}</td>
+                        <td style="vertical-align: middle" id="{{ id }}-password" name="{{ password }}">******</td>
+                        <td style="vertical-align: middle">{{ i.token }}</td>
+                        <td style="vertical-align: middle" id="{{ id }}-status">{{ i.status}}</td>
+                        <td><button id="{{ i.id }}" name="edit" type="button" class="btn btn-default">编辑</button></td>
+                         </tr>
+                     {% endfor %}
+                </tbody>
+            </table>
+        </fieldset>
+        </div>
+        <div class="update_dialog" style="display: none" role="dialog">
+            <div style="background-color: lightgray">
+                <div style="text-align: center; height: 30px;border: solid grey 1px">修改用户<button style="float: right" onclick="update_user()">X</button></div>
+            </div>
+            <div class="form_style">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3" style="margin-left: 10px">password:</label>
+                        <input type="password" class="col-sm-5" id="password" name="password" placeholder="please input name" />
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3" style="margin-left: 10px">status:</label>
+                        <input type="text" class="col-sm-5" id="status" name="status" placeholder="0 删除 1 有效" />
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-default" onclick="toUpdate()">修改</button>
+                        </div>
+                    </div>
+                    <input type="text" id="current_id" style="display: none" />
+                </form>
+            </div>
+        </div>
+        <div class="dialog_style" style="display: none" role="dialog">
+            <div style="background-color: lightgray">
+                <div style="text-align: center; height: 30px;border: solid grey 1px">添加用户<button style="float: right" onclick="add_user()">X</button></div>
+            </div>
+            <div class="form_style">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3" style="margin-left: 10px">username:</label>
+                        <input type="text" class="col-sm-5" name="username" id="username" placeholder="please input name" />
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3" style="margin-left: 10px">password:</label>
+                        <input type="password" class="col-sm-5" id="password" name="password" placeholder="please input password" />
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-default" onclick="toValid()">添加</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function addRow(){
+            $("div[class='dialog_style']").attr("style","display:block")
+        }
+        function add_user(){
+            $("div[class='dialog_style']").attr("style","display:none")
+        }
+        function update_user(){
+            $("div[class='update_dialog']").attr("style","display:none")
+        }
+        function toValid(){
+            var username = $("#username").attr("value").trim();
+            var password = $("#password").attr("value").trim();
+            if (!username){
+                alert("username not exit");
+                return false;
+            }
+            if (!password){
+                alert("password not exit");
+                return false;
+            }
+            $.get("/add_user", {"password":password, "username":username}, function(data){
+                if(data["status"] == 2){
+                    alert(data["message"]);
+                    return false
+                }else{
+                    alert("add user success");
+                    window.location.reload();
+                    return true
+                }
+            })
+        }
+        function toUpdate(){
+            var status = $("#status").val();
+            if (!status){
+                status = 1;
+            }
+            var password = $("#password").val();
+            var id = $("#current_id").val();
+            $("div[class='update_dialog']").attr("style","display:none");
+            $.get("/update_user_info", {"password":password, "status":status, "id":id}, function (data) {
+                console.log(data);
+                if (data["status"] == 1){
+                    window.location.reload();
+                    alert("修改成功");
+                }else{
+                    window.location.reload();
+                    alert(data["message"]);
+                }
+           })
+
+        }
+        $(function(){
+           $("button[name='edit']").click(function(){
+               var id = $(this).attr("id");
+               var password = $("#" + id + "-password").attr("name");
+               var status = $("#" + id + "-status").text().trim();
+               $("div[class='update_dialog']").attr("style","display:block");
+               $("#password").val(password);
+               $("#status").val(status);
+               $("#current_id").val(id);
+
+           });
+        });
+    </script>
+</body>
+
+</html>
+{% endblock head %}

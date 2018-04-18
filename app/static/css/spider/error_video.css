@@ -1,0 +1,61 @@
+.search-container {;
+    margin-top: 5px;
+    font-weight:bolder;
+    display: flex;
+}
+
+.ul_style {
+    list-style: none;
+    color: grey;
+    width: 90%;
+    font-family: youyuan;
+}
+
+ul >li {
+    display:inline-block;
+    margin-right: 2%;
+}
+
+ul > li span:hover {
+    color: red;
+    cursor: pointer;
+}
+.table_style {
+    padding-top: 3%;
+}
+
+.filter_style {
+    margin-top: 1%;
+}
+
+.h1_title {
+    border-bottom: solid 1px #ddd;
+    padding-bottom: 1%;
+    font-family: youyuan;
+}
+
+.search-filter {
+    margin-right: 2%;
+}
+
+.remove_style {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background: #ddd;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    margin-top: 8px;
+    margin-left: -12px;
+}
+
+.remove_style:hover {
+    cursor: pointer;
+    background: red;
+}
+
+.btn-style{
+    margin-left: 1%;
+    height: 35px;
+}

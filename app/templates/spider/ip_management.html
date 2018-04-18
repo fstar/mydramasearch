@@ -1,0 +1,44 @@
+{% extends "head.html" %}
+{% block head %}
+<body>
+{% include "header.html" %}
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="3000">
+    <link rel="stylesheet" href="../static/css/ip_management.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container body_nav">
+        <table class="table table-striped table-advance table-hover">
+            <thead>
+                <tr>
+                    <th>ip</th>
+                    <th>instance_id</th>
+                    <th>is_live</th>
+                    <th>create_time</th>
+                    <th>update_time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.ip }}</td>
+                        <td>{{ item.instance_id}}</td>
+                        <td>{{ item.is_live }}</td>
+                        <td>{{ item.create_time }}</td>
+                        {% if item.update_time %}
+                            <td>{{ item.update_time }}</td>
+                        {% else %}
+                            <td>空</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{#    <script src="../static/js/ip_management.js"></script>#}
+</body>
+</html>
+{% endblock head %}

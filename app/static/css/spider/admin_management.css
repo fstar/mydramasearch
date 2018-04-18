@@ -1,0 +1,39 @@
+
+.add_user {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.dialog_style {
+    top: 200px;
+    left: 38%;
+    width: 400px;
+    z-index:999;
+    position: absolute;
+    pading-left: 40%;
+    pading-bottom: 20px;
+    border: solid grey 1px;
+    background-color: white;
+}
+
+.update_user {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.update_dialog{
+    top: 200px;
+    left: 38%;
+    width: 400px;
+    z-index:999;
+    position: absolute;
+    pading-left: 40%;
+    pading-bottom: 20px;
+    border: solid grey 1px;
+    background-color: white;
+}
+
+.form_style{
+    margin-top: 10px;
+    background-color: white;
+}

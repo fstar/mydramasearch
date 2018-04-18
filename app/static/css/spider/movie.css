@@ -1,0 +1,24 @@
+html{
+    width: 100%;
+}
+
+body{
+    min-width: 1903px;
+}
+
+.search-container {
+    margin-top: 1%;
+    font-weight:bolder;
+}
+
+.video-select {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.table-style{
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 20px;
+}

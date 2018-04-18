@@ -1,0 +1,15 @@
+
+body{
+    min-width: 1500px;
+}
+
+.warning_style {
+    position: fixed;
+    top: 40%;
+    left: 45%;
+    border: 1px solid #fbeed5;
+    background-color: #fcf8e3;
+    width: 20%;
+    height: 100px;
+    animation: 1.5s opacity 0s infinite;
+}

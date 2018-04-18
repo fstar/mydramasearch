@@ -1,0 +1,17 @@
+{% extends "spider/head.html" %}
+{% block head %}
+<body>
+{% include "spider/header.html" %}
+
+<!doctype html>
+<html>
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body>
+    <div class="body_nav">
+        <h1>welcome to 视频爬虫系统</h1>
+    </div>
+</body>
+</html>
+{% endblock head %}

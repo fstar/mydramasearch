@@ -1,0 +1,274 @@
+{% extends "spider/head.html" %}
+{% block head %}
+<body>
+{% include "spider/header.html" %}
+<!doctype html>
+<html>
+<head>
+    <meta name="referrer" content="never">
+    <script src="../../static/js/spider/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/spider/common.css">
+    <link rel="stylesheet" href="../../static/css/spider/video.css" />
+    <link rel="stylesheet" href="../../static/css/spider/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../static/css/spider/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../static/css/spider/bootstrap-datetimepicker.min.css">
+    <script src="../../static/js/spider/bootstrap.min.js"></script>
+    <script src="../../static/js/spider/bootstrap-datetimepicker.js" ></script>
+    <link rel="stylesheet" href="../../static/css/spider/jquery.bs_pagination.min.css">
+    <script src="../../static/js/spider/jquery.bs_pagination.min.js"></script>
+    <script src="../../static/js/spider/en.min.js"></script>
+
+</head>
+<body>
+    <div  class="container-fluid body_nav">
+        <div style="margin-left: 30px;width: 100%;padding-top: 1%;padding-bottom: 1%;font-family: youyuan">
+            <div style="width: 5%;display: inline">
+                <span style="font-size: 20px">搜索框</span>
+            </div>
+            <div style="width: 40%;display: inline;margin-left: 2%;font-size: 17px">
+                <div name="filter-source" class="filter_style">
+                    <input id="filter-source" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />
+                    <span class="remove_style remove-source">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+                <div name="filter-selected" class="filter_style">
+                    <input id="filter-selected" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />
+                    <span class="remove_style remove-selected">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+                <div name="filter-accessable" class="filter_style">
+                    <input id="filter-accessable" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />
+                    <span class="remove_style remove-accessable">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+                <div name="filter-vip" class="filter_style">
+                    <input id="filter-vip" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />
+                    <span class="remove_style remove-vip">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+                <div name="filter-video_status" class="filter_style">
+                    <input id="filter-video_status" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />
+                    <span class="remove_style remove-video_status">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+                <div name="filter-upload_status" class="filter_style">
+                    <input id="filter-upload_status" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />
+                    <span class="remove_style remove-upload_status">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+                <div name="filter-update_status" class="filter_style" style="width: 5%">
+                    <input id="filter-update_status" class="form-control" style="width:70px;border-radius: 5%;display: inline " />
+                    <span class="remove_style remove-update_status">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+                <div name="filter-area" class="filter_style" style="width: 5%">
+                    <input id="filter-area" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />
+                    <span class="remove_style remove-area">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+                 <div name="filter-time" class="filter_style" style="width: 5%">
+                    <input id="filter-time1" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />-
+                     <input id="filter-time2" class="form-control" style="width: 70px;border-radius: 5%;display: inline" />
+                    <span class="remove_style remove-time">x</span>
+                    &nbsp;&nbsp;>>
+                </div>
+
+
+            </div>
+        </div>
+        <div style="margin-left: 30px;border-top: solid 1px #ddd;border-bottom: solid 1px #f5f5f5;width: 100%">
+            <div style="padding-top: 5px;padding-bottom: 5px">
+                <div class="search-container" name="source">
+                    <span style="width: 2%">来源</span>
+                    <ul class="ul_width" id="add-source">
+                    </ul>
+                </div>
+
+                <div class="search-container" style="display: flex" name="video_selected">
+                    <span style="width: 2%" title="选用">选用</span>
+                    <ul class="ul_width">
+                        <li class="li_style margin2right"><span value="">全部</span></li>
+                        <li class="li_style margin2right"><span value="0">未整理</span></li>
+                        <li class="li_style margin2right"><span value="1">已选用</span></li>
+                        <li class="li_style margin2right"><span value="2">暂时排除</span></li>
+                    </ul>
+                </div>
+
+                <div class="search-container" style="display: flex" name="video_accessable">
+                    <span title="上下架">上下架</span>
+                    <ul class="ul_width">
+                        <li class="li_style margin2right"><span value="">全部</span></li>
+                        <li class="li_style margin2right"><span value="1">上架</span></li>
+                        <li class="li_style margin2right"><span value="2">下架</span></li>
+                    </ul>
+                </div>
+
+
+
+                <div class="search-container" style="display: flex" name="video_status">
+                    <span style="width: 2%" title="下载失败:一集失败则整剧失败;&#10;未触发:全集都为未触发下载则为未触发;&#10;等待下载:全集都在排队等候下载;&#10;下载中:其余情况;&#10;下载完成:全集下载完成则下载完成;">下载</span>
+                    <ul class="ul_width">
+                        <li class="li_style margin2right"><span value="">全部</span></li>
+                        <li class="li_style margin2right"><span value="-1">下载失败</span></li>
+                        <li class="li_style margin2right"><span value="1">未触发下载</span></li>
+                        <li class="li_style margin2right"><span value="2">下载中</span></li>
+                        <li class="li_style margin2right"><span value="3">下载完成</span></li>
+                    </ul>
+                </div>
+                <div class="search-container" style="display: flex" name="upload_status">
+                    <span style="width: 2%" title="上传失败:一集失败则整剧失败;&#10;未触发:全集都为未触发上传则为未触发;&#10;等待上传:全集都在排队等候上传;&#10;上传中:其余情况;&#10;上传完成:全集上传完成则上传完成;">上传</span>
+                    <ul class="ul_width">
+                        <li class="li_style margin2right"><span value="">全部</span></li>
+                        <li class="li_style margin2right"><span value="-1">上传失败</span></li>
+                        <li class="li_style margin2right"><span value="1">未触发上传</span></li>
+                        <li class="li_style margin2right"><span value="2">上传中</span></li>
+                        <li class="li_style margin2right"><span value="3">上传完成</span></li>
+                    </ul>
+                </div>
+                <div class="search-container" style="display: flex" name="update_status">
+                    <span style="width: 2%">更新</span>
+                    <ul class="ul_width">
+                        <li class="li_style margin2right"><span value="">全部</span></li>
+                        <li class="li_style margin2right"><span value="1">更新中</span></li>
+                        <li class="li_style margin2right"><span  value="2">更新完成</span></li>
+                    </ul>
+                </div>
+                <div class="search-container" style="display: flex" name="area">
+                    <span style="width: 2%">地区</span>
+                    <ul class="ul_width" id="add-area">
+                    </ul>
+                </div>
+
+                <div class="search-container" style="display: block">
+                    <span style="margin-right: 2%">题材</span>
+                    <span style="margin-right: 2%">包含:</span>
+                    <input style="width: 10%;display: inline" placeholder="题材包含" class="form-control"  type="text" name="classify" id="search-classify"/>
+                    <span style="margin-right: 2%; margin-left: 2%">排除:</span>
+                    <input style="width: 10%;display: inline" placeholder="题材排除" class="form-control"  type="text" name="classify_not_in" id="search-classify_not_in"/>
+                </div>
+
+                <div class="search-container" style="display: block">
+                    <span style="margin-right: 2%">剧名</span>
+                    <label class="radio-inline">
+                      <input type="radio" name="name_model" id="inlineRadio1" value="1" checked> 精确查询
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="name_model" id="inlineRadio2" value="2"> 模糊查询
+                    </label>
+                    <input style="width: 30%;display: inline;margin-left: 1%" placeholder="(可使用分号';',分号隔开剧名同时查询多笔资料, 如:'杉杉来了;太阳的后裔'" class="form-control"  type="text" name="video_name" id="search-video"/>
+                </div>
+                <div class="search-container" style="display: block">
+                    <span style="margin-right: 2%">主演</span>
+                    <input style="width: 10%;display: inline" class="form-control" placeholder="搜索明星" type="text" name="star_name" id="search-star"/>
+                </div>
+                <div class="search-container block">
+                    <span style="margin-right: 2%">上映时间</span>
+                    <input size="10" id="time1" name="time1" type="text" value=""  readonly class="form-control form_datetime" style="width: 10em;display:inline ">&nbsp;&nbsp;--&nbsp;&nbsp;
+                    <input size="10" id="time2" name="time2" type="text" value=""  readonly class="form-control form_datetime margin2right" style="width: 10em;display: inline">
+                    <button type="submit" class="btn btn-default" id="time-quantum">确认</button>
+                    <div class="search-container" style="display: inline;margin-top: 0px;margin-left:1em ">
+                        <button type="submit" class="btn btn-default search-filter">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-style" style="font-size: 12px;">
+            <div style = "text-align:right;width: 96%;">
+              <button id='episode_excel' onclick="get_episode_excel()" type="button" class="btn btn-default search-filter">汇出excel</button>
+            </div>
+            <table class="table table-advance" style="table-layout: fixed">
+                <thead>
+                    <tr>
+                         <!-- <th width="5%">
+                            <span><label><input id="allSelect" type="checkbox" value="">全选</label></span>
+                        </th> -->
+
+                        <th width="10%">
+                            <span style="margin-top: 6px">剧集名</span>
+                        </th>
+
+                        <th width="7%">
+                            <span>非VIP/VIP/总集数</span>
+                        </th>
+
+                        <th width="4%">
+                            <span>上下架</span>
+                        </th>
+
+                        <th width="4%">
+                            <span>题材</span>
+                        </th>
+
+                        <th width="10%">
+                            <span>主演</span>
+                        </th>
+
+                        <th style="width: 5%">
+                            <span>地区</span>
+                        </th>
+
+                        <th style="width: 5%">
+                            <span>上映时间</span>
+                        </th>
+
+                         <th width="7%">
+                            <span>别名</span>
+                        </th>
+
+                        <th width="5%">
+                            <span>来源</span>
+                        </th>
+
+                         <th width="5%">
+                            <span>播放量</span>
+                        </th>
+
+                        <th width="5%">
+                            <span title="下载失败:一集失败则整剧失败;&#10;未触发:全集都为未触发下载则为未触发;&#10;等待下载:全集都在排队等候下载;&#10;下载中:其余情况;&#10;下载完成:全集下载完成则下载完成;">下载</span>
+                        </th>
+
+                        <th width="5%">
+                            <span title="上传失败:一集失败则整剧失败;&#10;未触发:全集都为未触发上传则为未触发;&#10;等待上传:全集都在排队等候上传;&#10;上传中:其余情况;&#10;上传完成:全集上传完成则上传完成;">上传</span>
+                        </th>
+
+                        <th width="9%">
+                          <span><label><input id="Selected_allSelect" type="checkbox" value="">选用状态</label></span>
+                          <button type="button" class="btn btn-xs btn-warning" onclick="changeselected_all(selected=1)">选用</button>
+                          <button type="button" class="btn btn-xs btn-warning" onclick="changeselected_all(selected=2)">排除</button>
+                        </th>
+
+                        <th width="15%">
+                            <span><label><input id="allSelect" type="checkbox" value="">全选</label></span>
+
+                            <select class="from-control download_level" id="download-level-1">
+                                <option value="1">批量下载低</option>
+                                <option value="2">批量下载中</option>
+                                <option value="3">批量下载高</option>
+                            </select>
+                            <button type="button" class="btn btn-xs btn-warning" onclick="download( id_list='', status=1, interf=1)">批量下载</button>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody id="json">
+                </tbody>
+            </table>
+            <div id="page" style="float: right;width: 50%;border: 0;background: none">
+            </div>
+            <div id="warning">
+            </div>
+        </div>
+    </div>
+    <script src="../../static/js/spider/common.js"></script>
+    <script src="../../static/js/spider/video.js"></script>
+</body>
+</html>
+{% endblock head %}
