@@ -23,9 +23,9 @@ def create_app():
     csrf.exempt(spider_management_bp)
     csrf.exempt(api_bp)
 
-    db.init_app()
-    db.app = app
-    db.create_all()
+    db.init_app(app)
+    with app.test_request_context():
+        db.create_all()
 
     redis_client.init_app(app)
 
