@@ -14,7 +14,7 @@ manager.add_command('db', MigrateCommand)
 @manager.option("-p", "--port", help="端口")
 def run(mode='debug', port=5000):
     if mode == "gevent":
-        http_server = WSGIServer(('', port), app)
+        http_server = WSGIServer(('0.0.0.0', int(port)), app)
         http_server.serve_forever()
     elif mode == "debug":
         app.run('0.0.0.0', int(port), debug=True)
