@@ -32,7 +32,7 @@ class Episode(db.Model):
     from_web = db.Column("from_web", VARCHAR(255), nullable=False, doc="来源网站")
 
     last_update_time = db.Column("last_update_time", DateTime, doc="更新时间")
-    create_time = db.Column("create_time", DateTime, nullable=False, server_default=func.now(), doc="创建时间")
+    create_time = db.Column("create_time", DateTime, nullable=False, server_default=func.now, doc="创建时间")
 
     classify = db.Column("classify", VARCHAR(length=255), nullable=False, server_default="",
                          doc="分类:悬疑, 古装, example: aaa;bbb;ccc. spilt by ';'")
@@ -261,7 +261,7 @@ class Video(db.Model):
     download_speed = db.Column("download_speed", INTEGER, nullable=False, server_default=str(0),
                                doc="下载速度")
     download_percent = db.Column("download_percent", FLOAT(), nullable=False, server_default=str(0),doc="下载进度")
-    create_time = db.Column("create_time", DateTime, nullable=False, server_default=func.now(),
+    create_time = db.Column("create_time", DateTime, nullable=False, server_default=func.now,
                             doc="timestamp of the row inserted")
 
     def __init__(self, **kwargs):
