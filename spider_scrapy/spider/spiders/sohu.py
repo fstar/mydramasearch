@@ -1,5 +1,5 @@
 import scrapy
-from spider.items import EpisodeItem, VideoItem
+from ..items import EpisodeItem, VideoItem
 import re
 
 

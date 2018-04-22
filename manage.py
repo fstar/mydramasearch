@@ -1,9 +1,7 @@
 from flask_script import Manager
 from gevent.wsgi import WSGIServer
-from app import create_app
+from app import app
 from flask_migrate import MigrateCommand
-
-app = create_app()
 
 manager = Manager(app)
 

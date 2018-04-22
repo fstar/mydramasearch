@@ -81,6 +81,8 @@ class Config:
 
     CELERY_BROKER_URL = "redis://:%s@%s:%s/%s" % (celery_redis_password, celery_redis_host,
                                                   celery_redis_port, celery_redis_db_name)
+    CELERY_RESULT_BACKEND = "redis://:%s@%s:%s/%s" % (celery_redis_password, celery_redis_host,
+                                                  celery_redis_port, celery_redis_db_name)
     LOG_PATH = log_path
 
 
