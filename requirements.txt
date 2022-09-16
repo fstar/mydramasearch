@@ -33,7 +33,7 @@ itsdangerous==0.24
 Jinja2==2.10
 kombu==4.1.0
 lxml==4.2.1
-Mako==1.0.7
+Mako==1.2.2
 MarkupSafe==1.0
 parsel==1.4.0
 pyasn1==0.4.2
